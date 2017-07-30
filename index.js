@@ -18,7 +18,7 @@
 	        });
 		});
 	};
-	class StorageServer {
+	class StoreServer {
 		constructor(storage,options={accept:["clear","count","compress","key"],methods:["POST","GET", "PUT", "DELETE", "OPTIONS"]}) {
 			const handler = (request,response) => {
 				const urlpath = request.url.substring(0,(request.url.indexOf("?")>0 ? request.url.indexOf("?") : request.url.length));
@@ -108,9 +108,14 @@
 			}
 			this.httpServer = require("http").createServer(handler);
 		}
-		listen(port) {
-			this.httpServer.listen(port,() => console.log("RemoteStore listening ..."));
+		listen(port,cb) {
+			if(cb) {
+				this.httpServer.listen(port,cb);
+			} else {
+				this.httpServer.listen(port);
+				return Promise.resolve();
+			}
 		}
 	}
-	module.exports = StorageServer;
+	module.exports = StoreServer;
 })();	
