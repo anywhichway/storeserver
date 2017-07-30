@@ -1,0 +1,32 @@
+{
+  "name": "storeserver",
+  "version": "0.0.1",
+  "description": "A generic server for wrapping objects supporting the Web Storage API",
+  "engines": {},
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "mocha test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anywhichway/storeserver.git"
+  },
+  "keywords": [
+    "filestore, database, key-value, localstorage, JSONBlockStore"
+  ],
+  "author": "Simon Y. Blackwell <syblackwell@anywhichway.com> (http://www.github.com/anywhichway)",
+  "bugs": {
+    "url": "https://github.com/anywhichway/storeserver/issues"
+  },
+  "homepage": "https://github.com/anywhichway/storeserver#readme",
+  "dependencies": {
+    "node-fetch": "^1.7.1",
+    "remotestore": "0.0.2"
+  },
+  "devDependencies": {
+    "blockstore": "^0.1.4",
+    "chai": "^4.1.0",
+    "mocha": "^3.4.2"
+  }
+}

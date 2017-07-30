@@ -1,0 +1,26 @@
+<html>
+<head>
+<script src="http://localhost:3000/remotestore.js"></script>
+</head>
+
+<script>
+const store = new RemoteStore("http://localhost:3000");
+
+store.set("id1",{test:"test"}).then(() => {
+	store.get("id1").then((data) => {
+		console.log(data)
+	});
+	store.key(0).then((key) => {
+		console.log(key);
+	})
+	store.key(1).then((key) => {
+		console.log(typeof(key));
+	});
+	setTimeout(() => {
+		store.get("id1").then((data) => {
+			console.log(data)
+		});
+	},1000);
+})
+</script>
+</html>
