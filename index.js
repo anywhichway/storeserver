@@ -19,7 +19,7 @@
 		});
 	};
 	class StoreServer {
-		constructor(storage,options={accept:["clear","count","compress","key"],methods:["POST","GET", "PUT", "DELETE", "OPTIONS"]}) {
+		constructor(storage,options={functions:["clear","count","compress","key"],methods:["POST","GET", "PUT", "DELETE", "OPTIONS"]}) {
 			const handler = (request,response) => {
 				setTimeout(() => {
 					const urlpath = request.url.substring(0,(request.url.indexOf("?")>0 ? request.url.indexOf("?") : request.url.length));
@@ -46,6 +46,32 @@
 				 	        }
 				 	    });
 				    	 return;
+				    } else {
+				    	const ext = path.extname(urlpath);
+				    	if(ext!=="") {
+				    		fs.readFile(path.normalize([__dirname,"public",urlpath].join("/")), function(error, content) {
+					 	        if (error) {
+					 	        	let message, code;
+					 	            if(error.code == "ENOENT"){
+					 	            	code = 404;
+					 	                message = urlpath + " not found"+" ..\n";
+					 	            }
+					 	            else {
+					 	                code = 500;
+					 	                message = "Sorry, check with the site admin for error: "+error.code+" ..\n";
+					 	            }
+					 	            console.log(code,error.code,path.normalize([__dirname,urlpath].join("/")));
+					 	            response.writeHead(code);
+					 	            response.end(message);
+					 	            response.end();
+					 	        }
+					 	        else {
+					 	            response.writeHead(200);
+					 	            response.end(content);
+					 	        }
+					 	    });
+					    	 return;
+				    	}
 				    }
 				    const id = urlpath.substring(1);
 			    	if(!options.methods.includes(request.method)) {
@@ -67,12 +93,13 @@
 			    	} else if(request.method==="GET") {
 				    	storage.get(id).then((result) => {
 				    		const headers = {};
-			      	      	headers["Access-Control-Allow-Origin"] = "*";
+			      	      	//headers["Access-Control-Allow-Origin"] = "*";
 			      	      	response.writeHead(200, headers);
 				    		response.end(JSON.stringify(result));
 				    	})
 				    } else if(request.method==="PUT") {
 				    	getBody(request).then((body) => {
+				    		// insert the versioning stuff, or add a version server intermediate wrapper!
 				    		storage.set(id,body).then(() => {
 				    			const headers = {};
 				      	      	headers["Access-Control-Allow-Origin"] = "*";
@@ -85,7 +112,7 @@
 				    		response.end(result);
 				    	})
 				    } else if(request.method==="POST") {
-				    	if(!options.accept.includes(id)) {
+				    	if(!options.functions.includes(id)) {
 				    		const headers = {};
 			      	      	headers["Access-Control-Allow-Origin"] = "*";
 				    		response.writeHead(403,headers);

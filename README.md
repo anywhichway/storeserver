@@ -19,6 +19,8 @@ npm install storageserver
 
 # Release History (reverse chronological order)
 
+v0.0.6 2017-07-30 ALPHA Updated dependencies. Adjusted example code.
+
 v0.0.4 2017-07-30 ALPHA Incremented version of `remotestore` dependency
 
 v0.0.3 2017-07-30 ALPHA Modified internal handler to immediately set a timeout and return. Maximizes load that can be handled at the expense of RAM.

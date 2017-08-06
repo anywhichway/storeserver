@@ -1,6 +1,6 @@
 {
   "name": "storeserver",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "A generic server for wrapping objects supporting the Web Storage API",
   "engines": {},
   "license": "MIT",
@@ -21,12 +21,12 @@
   },
   "homepage": "https://github.com/anywhichway/storeserver#readme",
   "dependencies": {
-    "node-fetch": "^1.7.1",
-    "remotestore": "0.0.4"
+    "remotestore": "0.0.8"
   },
   "devDependencies": {
     "blockstore": "^0.1.5",
-    "chai": "^4.1.0",
-    "mocha": "^3.4.2"
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
+    "node-fetch": "^1.7.1"
   }
 }

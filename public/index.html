@@ -2,7 +2,7 @@
 <head>
 <script src="http://localhost:3000/remotestore.js"></script>
 </head>
-
+<body>
 <script>
 const store = new RemoteStore("http://localhost:3000");
 
@@ -23,4 +23,5 @@ store.set("id1",{test:"test"}).then(() => {
 	},1000);
 })
 </script>
+</body>
 </html>
